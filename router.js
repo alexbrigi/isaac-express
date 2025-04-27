@@ -1,18 +1,20 @@
 const express = require('express')
 const { getPersonajes, postPersonajes, putPersonajes, deletePersonajes } = require('./controllers')
 
+//-- Router --//
+
 const {Registro} = require('./schema')
 
 const router = express.Router()
 
-    router.route(`/personajes`)
+    router.route(`/personajes`) 
         .get(getPersonajes)
         .post(postPersonajes)
         .put(putPersonajes)
     router.route(`/personajes/_id/:_id`)
         .delete(deletePersonajes)
 
-    router.post('/register', async (req,res)=>{
+    router.post('/register', async (req,res)=>{  // Router del Registro
         const {username, email, password} = req.body
         if (!username || !email || !password) {
             return res.status(400).json({ message: 'Faltan campos requeridos.' });
@@ -30,7 +32,7 @@ const router = express.Router()
         }
     })
 
-    router.post('/login', async (req, res) => {
+    router.post('/login', async (req, res) => { // Router del Login
         const { username, password } = req.body;
         if (!username || !password) {
             return res.status(400).json({ message: 'Faltan campos requeridos.' });
@@ -40,8 +42,6 @@ const router = express.Router()
             if (!user) {
                 return res.status(400).json({ message: 'Usuario no encontrado.' });
             }
-    
-            
             if (user.password === password) {  
                 return res.status(200).json({ message: 'Usuario logeado correctamente .' });
             } else {

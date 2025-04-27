@@ -1,6 +1,8 @@
 const {Personajes} = require('./schema')
 
-const getPersonajes = async (req,res,next)=>{
+//-- Controllers --//
+
+const getPersonajes = async (req,res,next)=>{   // Petición GET
     try {
         const buscar = await Personajes.find()
         res.json(buscar)
@@ -8,10 +10,10 @@ const getPersonajes = async (req,res,next)=>{
         next(error)
     }
 }
-const postPersonajes = async (req,res,next)=>{
+const postPersonajes = async (req,res,next)=>{ // Petición POST
     try {
         const {name,health,damage,startingItems,image} = req.body
-        const nuevo = new Personajes({
+        const nuevo = new Personajes({ 
             name,
             health,
             damage,
@@ -26,7 +28,7 @@ const postPersonajes = async (req,res,next)=>{
     }
     
 }
-const putPersonajes = async (req,res,next)=>{
+const putPersonajes = async (req,res,next)=>{ // Petición PUT
     try {
         const { _id, ...datos} = req.body
         await Personajes.findByIdAndUpdate(_id,datos)
@@ -36,7 +38,7 @@ const putPersonajes = async (req,res,next)=>{
         next(error)
     }
 }
-const deletePersonajes = async (req,res,next)=>{
+const deletePersonajes = async (req,res,next)=>{ // Petición DELETE
     try {
         const {_id} = req.params
         await Personajes.findByIdAndDelete(_id)
@@ -47,7 +49,6 @@ const deletePersonajes = async (req,res,next)=>{
     }
     
 }
-
 
 module.exports = {
     getPersonajes,

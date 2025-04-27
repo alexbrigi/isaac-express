@@ -7,9 +7,9 @@ const express = require('express')
 const cors    = require('cors')
 const mongoose = require('mongoose')
 
-const MONGO_URL = process.env.MONGO_URL || `mongodb://localhost:27017/cei` 
+const MONGO_URL = process.env.MONGO_URL || `mongodb://localhost:27017/cei` // Entorno MONGO
 
-const conectar = async () => {
+const conectar = async () => { // Conexión MONGO
     await mongoose.connect(MONGO_URL)
         .then(()=>console.log(`Mongo | Conectado`))
         .catch((error)=>console.log(error))
