@@ -17,7 +17,7 @@ const conectar = async () => { // Conexión MONGO
 conectar()
 
 const app = express()
-    app.use(cors('https://isaac-react.vercel.app'))
+    app.use(cors())
     app.use(express.urlencoded({extended : false}))
     app.use(express.json())
     app.use(router)
